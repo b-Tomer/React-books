@@ -19,10 +19,6 @@
 .open{
     transform: translateX(0);
 }
-a:hover{
-    color: var( --clr2bg);
-    background: #d8d9da78;
-}
 
 .app-nav a{
     margin-bottom: 20px;

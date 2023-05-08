@@ -10,6 +10,7 @@ export function BookList({ books ,onRemoveBook , onSelectBook }) {
                     <section>
                         <button onClick={() => onRemoveBook(book.id)} >X</button>
                         <Link to={`/book/${book.id}`}> Details </Link>
+                        <Link to={`/book/edit/${book.id}`}> Edit </Link>
                      
                     </section>
                 </li>

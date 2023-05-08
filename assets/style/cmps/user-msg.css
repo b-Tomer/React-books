@@ -1,12 +1,19 @@
 .user-msg {
-    background-color: lightgray;
+    background-color: var(--clr2bg);
+    opacity: 0.9;
     padding: .5em 1em;
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     right: 1em;
     color: white;
     font-weight: bold;
     border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    width: 260px;
+    border-radius: 1em ;
+    align-items: center;
 }
 
 .user-msg.success {
@@ -19,6 +26,12 @@
 
 
 .user-msg button{
-    float: right;
+    width: fit-content;
+    color: var(--clr1bg);
     margin: 1em;
+}
+
+.user-msg button:hover{
+background-color: var( --gray1);
+
 }
