@@ -50,6 +50,7 @@ let gBooks =[
     },
     {
       "id": "1y0Oqts35DQ",
+      'reviews':[],
       "title": "at viverra venenatis",
       "subtitle": "gravida libero facilisis rhoncus urna etiam",
       "authors": [
@@ -447,7 +448,7 @@ let gBooks =[
   ]
 
 _createBooks()
-
+// import {utilService} from ""
 
 export const bookService = {
     query,
@@ -455,6 +456,7 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
+    getEmptyReview,
     getDefaultFilter,
 }
 
@@ -494,6 +496,10 @@ function save(book) {
 
 function getEmptyBook( name ,price = 55) {
     return { id: '',name , price }
+}
+
+function getEmptyReview() {
+    return { id:utilService.makeId(), name: '' , stars: 3 , txt: ''}
 }
 
 function getDefaultFilter() {

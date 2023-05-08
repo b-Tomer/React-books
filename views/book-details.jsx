@@ -1,28 +1,30 @@
+import { AddReview } from "../cmps/add-review.jsx"
 import { LongTxt } from "../cmps/long-txt.jsx"
+import { Reviews } from "../cmps/reviews.jsx"
 import { bookService } from "../services/book.service.js"
-const {Link } = ReactRouterDOM
+const { Link } = ReactRouterDOM
 
-const {useState , useEffect} = React
-const {useParams} = ReactRouterDOM 
+const { useState, useEffect } = React
+const { useParams } = ReactRouterDOM
 
 
 export function BookDetails({ onBack }) {
 
 
-    const [book , setBook] = useState(null)
+    const [book, setBook] = useState(null)
     const params = useParams()
 
 
-    useEffect(()=>{
+    useEffect(() => {
         bookService.get(params.bookId).then(setBook)
-        console.log(params);
-    },[])
-    
+        // console.log(params);
+    }, [])
+
 
 
 
     function checkPages() {
-        if(!book) return
+        if (!book) return
         const pageCount = book.pageCount
         let pagesTxt
         if (pageCount > 500) pagesTxt = 'Serious reading'
@@ -33,7 +35,7 @@ export function BookDetails({ onBack }) {
 
     checkVintage()
     function checkVintage() {
-        if(!book) return
+        if (!book) return
         const year = new Date().getFullYear()
         const publishDate = book.publishedDate
         const deff = year - publishDate
@@ -41,40 +43,42 @@ export function BookDetails({ onBack }) {
         return publishTxt
     }
 
-    function priceClass(){
-        if(!book) return
+    function priceClass() {
+        if (!book) return
         let price = book.listPrice.amount
-        let classPrice  =''
-        if(price>150) classPrice = 'red'
-        if(price<20) classPrice = 'green'
+        let classPrice = ''
+        if (price > 150) classPrice = 'red'
+        if (price < 20) classPrice = 'green'
         return classPrice
     }
 
-    function saleTxt(){
-        if(!book) return
+    function saleTxt() {
+        if (!book) return
         let txt = ''
-        let isOnsale= book.listPrice.isOnSale
-        if(isOnsale) txt = 'ON SALE!'
+        let isOnsale = book.listPrice.isOnSale
+        if (isOnsale) txt = 'ON SALE!'
         return txt
     }
 
-    
-    if(!book) return <div>Loading.....</div>
+
+    if (!book) return <div>Loading.....</div>
 
 
-        return (
-            <section className="book-details">
+    return (
+        <section className="book-details">
             <h1>{book.title}</h1>
             <h4>{book.subtitle}</h4>
             <h3>Author: {book.authors}</h3>
-            <h4 className={priceClass()}>Price: {book.listPrice.amount } {book.listPrice.currencyCode} </h4>
+            <h4 className={priceClass()}>Price: {book.listPrice.amount} {book.listPrice.currencyCode} </h4>
             <h4 className="red">{saleTxt()}</h4>
             <h5>Pages: {book.pageCount} - {checkPages()}</h5>
             <h5>Publish at: {book.publishedDate} - {checkVintage()}</h5>
             <img src={book.thumbnail} />
-            <LongTxt text = {book.description}/>
+            <LongTxt text={book.description} />
+            <Reviews bookId={book.id} />
+            <AddReview bookId={book.id} />
             <Link to="/book">Back</Link>
-            
+
         </section>
     )
 
