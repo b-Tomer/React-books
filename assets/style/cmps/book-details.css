@@ -16,3 +16,11 @@
     display: block;
     margin: auto;
 }
+.next-btns{
+    margin: 10px;
+    align-self: center;
+}
+
+.back-btn{
+    align-self: center;
+}

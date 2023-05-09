@@ -1,6 +1,7 @@
 const { useState } = React
 
 export function LongTxt({ text }) {
+  if(!text) return
   const isMoreThan100 = (text.length >= 100)
   const [showAll, setShowAll] = useState(false)
 

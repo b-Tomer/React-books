@@ -39,8 +39,8 @@ export function Reviews({ bookId }) {
       }
 
 
-    console.log(reviews);
-    console.log(bookToEdit);
+    // console.log(reviews);
+    // console.log(bookToEdit);
     if (!reviews || reviews.length === 0) return ''
     
     return (

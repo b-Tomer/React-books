@@ -14,3 +14,16 @@
     align-items: center;
     background-color: var(--clr1bg);
 }
+
+.list-btns{
+    display: flex;
+    height: 50px;
+    min-width: 100px;
+    align-items: center;
+}
+
+.remove-btn{
+    height: 34px;
+    border-radius:50% ;
+    background-color: #c79e9eb7;
+}

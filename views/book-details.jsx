@@ -1,26 +1,49 @@
+
+const { useState, useEffect } = React
+const { useParams } = ReactRouterDOM
+
+
+
 import { AddReview } from "../cmps/add-review.jsx"
 import { LongTxt } from "../cmps/long-txt.jsx"
 import { Reviews } from "../cmps/reviews.jsx"
 import { bookService } from "../services/book.service.js"
 const { Link } = ReactRouterDOM
 
-const { useState, useEffect } = React
-const { useParams } = ReactRouterDOM
 
-
-export function BookDetails({ onBack }) {
+export function BookDetails() {
 
 
     const [book, setBook] = useState(null)
-    const params = useParams()
+    const [nextBookId, setNextBookId] = useState(null)
+    const [prevBookId, setPrevBookId] = useState(null)
+    const {bookId} = useParams()
 
 
     useEffect(() => {
-        bookService.get(params.bookId).then(setBook)
-        // console.log(params);
-    }, [])
+        loadBook()
+        loadNextBookId()
+        loadPrevBookId()
 
+    }, [bookId])
 
+    function loadBook() {
+        bookService.get(bookId)
+            .then(setBook)
+            .catch(err => {
+                console.log('Had issued in car details:', err);
+            })
+    }
+
+    function loadNextBookId() {
+        bookService.getNextBookId(bookId)
+            .then(setNextBookId)
+    }
+
+    function loadPrevBookId() {
+        bookService.getPrevBookId(bookId)
+            .then(setPrevBookId)
+    }
 
 
     function checkPages() {
@@ -77,7 +100,12 @@ export function BookDetails({ onBack }) {
             <LongTxt text={book.description} />
             <Reviews bookId={book.id} />
             <AddReview bookId={book.id} />
-            <Link to="/book">Back</Link>
+            <section className="next-btns">
+            <Link to={`/book/${prevBookId}`}> Prev </Link>
+            <Link to={`/book/${nextBookId}`}> Next </Link>
+            </section>
+            <Link className="back-btn" to="/book">Back</Link>
+
 
         </section>
     )

@@ -1,0 +1,21 @@
+.add-review{
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    padding: 10px;
+    border: 2px solid var(--clr2);
+    min-width: 360px;
+    margin-bottom: 20px;
+    
+}
+
+.item-input{
+display: flex;
+justify-content: space-between;
+gap: 20px;
+}
+
+.save-btn{
+    margin-left: 40%;
+
+}

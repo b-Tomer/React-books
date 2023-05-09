@@ -55,16 +55,22 @@ export function AddReview({bookId}) {
     return (
         <div className="add-review">Add your review: 
             <form onSubmit={onSaveBook} >
+                <div className="item-input">
                 <label htmlFor="name">Name: </label>
                 <input onChange={handleChange} placeholder="your name" type="text" name="name" id="name" />
-
+                </div>
+                    
+                <div className="item-input">
                 <label htmlFor="stars">Stars: </label>
                 <input onChange={handleChange} type="range" min='1' max='5' name="stars" id="stars" />
+                </div>
 
+                <div className="item-input">
                 <label htmlFor="txt">Comments: </label>
                 <input onChange={handleChange} placeholder="Describe your feelings about the book.." type="text" name="txt" id="txt" />
+                </div>
+                <button className="save-btn">{newReview.id ? 'Save' : 'Add'}</button>
 
-                <button>{newReview.id ? 'Save' : 'Add'}</button>
             </form>
         </div>
     )
