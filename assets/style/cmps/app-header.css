@@ -12,13 +12,6 @@
     display: flex;
     gap: 15px;
 }
-.closed{
-    transform: translateX(120%);
-}
-
-.open{
-    transform: translateX(0);
-}
 
 .app-nav a{
     margin-bottom: 20px;
@@ -29,7 +22,7 @@
     color: var(--clr2bg-light) ;
 }
 .app-nav a:hover{
-    color: aliceblue;
+    color: var(--clr2);
 }
 .menu-btn {
     visibility: hidden;

@@ -11,6 +11,7 @@
     grid-template-columns: 100px 190px;
     align-items:center;
     flex-wrap: wrap;
+    
 }
 
 .filter-lable{

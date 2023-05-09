@@ -5,7 +5,7 @@ const {Link , NavLink} = ReactRouterDOM
 export function AppHeader() {
     
     const [menuBtn, setMenuBtn] = useState(false);
-    let menuClass = menuBtn ? "closed" : "open";
+    let menuClass = menuBtn ? "open" : "closed";
 
     
 
@@ -16,9 +16,9 @@ export function AppHeader() {
       <h1>React Books App</h1>
       <nav className={`app-nav ${menuClass}`}>
      
-     <NavLink to="/" >Home</NavLink>
-     <NavLink to="/about" >About</NavLink>
-     <NavLink to="/book" >Books</NavLink>
+     <NavLink onClick={() => setMenuBtn(false)} to="/" >Home</NavLink>
+     <NavLink onClick={() => setMenuBtn(false)} to="/about" >About</NavLink>
+     <NavLink onClick={() => setMenuBtn(false)} to="/book" >Books</NavLink>
       </nav>
       <button onClick={() => setMenuBtn(!menuBtn)} className="menu-btn" >
         <i className="fa-solid fa-bars"></i>

@@ -13,8 +13,17 @@
         transition: transform 0.6s;
         padding-top: 128px;
         align-items: center;
-        
+
     }
+
+    .open {
+        transform: translateX(0);
+    }
+
+    .closed {
+        transform: translateX(120%);
+    }
+
 
     .menu-btn {
         visibility: visible;
@@ -22,7 +31,8 @@
         background: #f4f2f200;
         justify-self: center;
     }
-    .menu-btn:hover{
+
+    .menu-btn:hover {
         background-color: #d7d3d356;
     }
 
@@ -30,13 +40,7 @@
 }
 
 
-@media (min-width: 700px) {
+@media (min-width: 700px) {}
 
 
-}
-
-
-@media (min-width: 960px) {
-
-
-}
+@media (min-width: 960px) {}
