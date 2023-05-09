@@ -2,14 +2,19 @@ const { useState, useEffect } = React
 const { useNavigate } = ReactRouterDOM
 
 import { bookService } from "../services/book.service.js";
+import { CommentInput } from "./comment-input.jsx";
+import { RateInput } from "./rate-input.jsx";
+import { StarInput } from "./star-input.jsx";
 
 
-export function AddReview({bookId}) {
+export function AddReview({ bookId }) {
     // console.log(bookId);
     const [newReview, setNewReview] = useState(null)
     const [bookToEdit, setBookToEdit] = useState(null)
     const navigate = useNavigate()
-    
+    const [cmpType, setCmpType] = useState('stars')
+
+
     useEffect(() => {
         if (bookId) loadBook()
         setNewReview(bookService.getEmptyReview())
@@ -18,7 +23,7 @@ export function AddReview({bookId}) {
 
 
     function loadBook() {
-        
+
         bookService.get(bookId)
             .then(setBookToEdit)
             .catch(err => {
@@ -27,7 +32,7 @@ export function AddReview({bookId}) {
             })
     }
 
-    
+
     function handleChange({ target }) {
         const field = target.name
         console.log('field: ', field);
@@ -36,42 +41,54 @@ export function AddReview({bookId}) {
         setNewReview(prevReview => ({ ...prevReview, [field]: value }))
 
     }
-    
+
     function onSaveBook(ev) {
         ev.preventDefault()
         console.log(bookToEdit);
-        if(!bookToEdit.reviews) bookToEdit.reviews= [newReview]
+        if (!bookToEdit.reviews) bookToEdit.reviews = [newReview]
         else bookToEdit.reviews.push(newReview)
-        
+
         bookService.save(bookToEdit)
-        .then(() => {
-    
-            navigate('/book')
+            .then(() => {
+
+                navigate('/book')
             })
-        }
-    
+    }
+
     // console.log('newReview: ',newReview)
     if (!newReview) return ''
     return (
-        <div className="add-review">Add your review: 
+        <div className="add-review">Add your review:
             <form onSubmit={onSaveBook} >
+            <section>
+            <select onChange={(ev) => { setCmpType(ev.target.value) }}>
+                <option value="stars">Stars</option>
+                <option value="text">Comment</option>
+                <option value="rate">Rate</option>
+            </select>
+        </section>
                 <div className="item-input">
-                <label htmlFor="name">Name: </label>
-                <input onChange={handleChange} placeholder="your name" type="text" name="name" id="name" />
+                    <label htmlFor="name">Name: </label>
+                    <input onChange={handleChange} placeholder="your name" type="text" name="name" id="name" />
                 </div>
-                    
-                <div className="item-input">
-                <label htmlFor="stars">Stars: </label>
-                <input onChange={handleChange} type="range" min='1' max='5' name="stars" id="stars" />
-                </div>
+                <section>
+                    <DynamicCmp cmpType={cmpType} name="tomer" handleChange={handleChange} />
+                </section>
 
-                <div className="item-input">
-                <label htmlFor="txt">Comments: </label>
-                <input onChange={handleChange} placeholder="Describe your feelings about the book.." type="text" name="txt" id="txt" />
-                </div>
                 <button className="save-btn">{newReview.id ? 'Save' : 'Add'}</button>
 
             </form>
         </div>
     )
+}
+
+function DynamicCmp(props) {
+    switch (props.cmpType) {
+        case 'stars':
+            return <StarInput {...props} />
+        case 'text':
+            return <CommentInput {...props} />
+        case 'rate':
+            return <RateInput {...props} />
+    }
 }
